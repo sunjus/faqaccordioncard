@@ -73,6 +73,7 @@ import React, { Component } from "react";
 import TOC from "./components/TOC";
 import ReadContent from "./components/ReadContent";
 import CreateContent from "./components/CreateContent";
+import UpdateContent from "./components/UpdateContent";
 import Subject from "./components/Subject";
 import Control from "./components/Control";
 import "./App.css";
@@ -131,6 +132,25 @@ class App extends Component {
             });
           }.bind(this)}
         ></CreateContent>
+      );
+    } else if (this.state.mode === "update") {
+      _article = (
+        <UpdateContent
+          onSubmit={function (_title, _desc) {
+            //add contetn to this.state.contents
+            console.log(_title, _desc);
+            this.max_contents_id = this.max_contents_id + 1;
+            let _contents = this.state.contents.concat({
+              id: this.max_contents_id,
+              title: _title,
+              desc: _desc,
+            });
+
+            this.setState({
+              contents: _contents,
+            });
+          }.bind(this)}
+        ></UpdateContent>
       );
     }
     return (
